@@ -22,4 +22,9 @@ const create = async (displayName, email, password, image = '') => {
   return token;
 };
 
-module.exports = { create };
+const getAll = async () => {
+  const users = await User.findAll({ attributes: { exclude: ['password'] } });
+  return users;
+};
+
+module.exports = { create, getAll };
