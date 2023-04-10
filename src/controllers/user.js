@@ -22,4 +22,16 @@ const getAll = async (_req, res, next) => {
   }
 };
 
-module.exports = { create, getAll };
+const getById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const user = await userService.getById(+id);
+
+    return res.status(200).json(user);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+module.exports = { create, getAll, getById };
