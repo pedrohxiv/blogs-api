@@ -1,6 +1,7 @@
 const express = require('express');
 
 const loginRoutes = require('./routes/login');
+const userRoutes = require('./routes/user');
 
 const errorHandler = require('./middlewares/errorHandler');
 
@@ -18,6 +19,7 @@ app.use(express.json());
 // ...
 
 app.use('/login', loginRoutes);
+app.use('/user', userRoutes);
 
 app.use(errorHandler);
 
