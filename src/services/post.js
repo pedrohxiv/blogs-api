@@ -57,4 +57,16 @@ const getById = async (id) => {
   return post;
 };
 
-module.exports = { create, getAll, getById };
+const update = async (id, title, content, userId) => {
+  if (id !== userId) {
+    throw httpErrGen(401, 'Unauthorized user');
+  }
+  if (!title || !content) {
+    throw httpErrGen(400, 'Some required fields are missing');
+  }
+  await BlogPost.update({ title, content, updated: new Date() }, { where: { id } });
+  const updatedPost = await getById(id);
+  return updatedPost;
+};
+
+module.exports = { create, getAll, getById, update };
